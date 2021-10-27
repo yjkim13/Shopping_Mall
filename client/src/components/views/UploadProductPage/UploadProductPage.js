@@ -3,7 +3,7 @@ import React from 'react'
 function UploadProductPage() {
     return (
         <div>
-            UploadProductPage
+            UploadProductPage!!
         </div>
     )
 }
