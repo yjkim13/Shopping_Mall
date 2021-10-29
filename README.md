@@ -1,16 +1,13 @@
-Hello, My Friends  
-Thank you for Having interest in this repository ! 
+인프런 강의를 통해 쇼핑몰을 만드는 클론코딩 하기.
 
-To use this application, 
+<순서>
+1. 업로드 페이지 만들기
+3. 랜딩 페이지 만들기
+4. 상세보기 페이지 만들기
+5. 카트 페이지 만들기
+6. 결제내역 페이지 만들기
 
-1. make dev.js file inside config folder 
-2. put mongoDB info into dev.js file 
-3. Type  " npm install " inside the root directory  ( Download Server Dependencies ) 
-4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
+DB : MongoDB
+Tool : VSCode
 
-
-If you have problem, feel free to ask me ^^ 
-
- You can watch the tutorial for this app.
-
-https://www.youtube.com/channel/UCFyXA9x8lpL3EYWeYhj4C4Q?view_as=subscriber
+※ 기본적인 CSS는 강의에서 제공하고 있는 CSS를 다운로드
