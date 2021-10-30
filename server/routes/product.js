@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const multer  = require('multer')
+const multer  = require('multer');
+const {Product} = require('../models/Product');
 
 //=================================
 //             Product
@@ -28,6 +29,28 @@ router.post('/image',(req,res)=>{
         return res.json({ success: true, filePath: res.req.file.path , fileName: res.req.file.filename})
     })
 
+})
+
+router.post('/',(req,res)=>{
+
+    //받아온 정보들을 DB에 넣어준다.
+   const product = new Product(req.body)
+    product.save((err) => {
+        if(err) return res.status(400).json({success: false,err})
+        return res.status(200).json({success: true })
+    })
+    
+})
+
+router.post('/products',(req,res)=>{
+
+  //product collect에 있는 상품을 모두 가져오기.
+  Product.find()
+  .populate("writer")
+  .exec((err,productInfo)=> {
+    if(err) return res.status(400).json({success :false, err})
+    return res.status(200).json({success: true, productInfo})
+  })
 })
 
 module.exports = router;
