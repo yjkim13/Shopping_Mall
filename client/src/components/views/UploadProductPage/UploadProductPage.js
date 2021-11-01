@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import {Typography, Button, Form, Input} from 'antd';
 import FileUpload from '../../utils/FileUpload';
 import Axios from 'axios';
+import { Components } from 'antd/lib/date-picker/generatePicker';
 
 
 //const {Title} = Typography;
@@ -59,7 +60,7 @@ function UploadProductPage(props) {
             description : Description,
             price: Price,
             images: Images,
-            continent: Continent
+            continents: Continent
         }
         Axios.post("/api/product",body)
         .then(response => {
@@ -96,9 +97,9 @@ function UploadProductPage(props) {
         <Input type="number" onChange={priceChangeHandler} value={Price}/>
         <br/>
         <br/>
-        <select onChange={continentChangeHandler}>
+        <select onChange={continentChangeHandler} >
             {Continents.map(item => (
-                 <option key={item.Key} value={item.value}> {item.value} </option>
+                 <option key={item.Key} value={item.Key}> {item.value} </option>
             ))}
         </select>
         <br/>
