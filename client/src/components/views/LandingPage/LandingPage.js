@@ -5,6 +5,8 @@ import RocketOutlined from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
 import {Col, Row , Card} from 'antd'
 import ImageSlider from '../../utils/ImageSlider';
+import CheckBox from './Sections/CheckBox';
+import {continents} from './Sections/Datas';
 
 function LandingPage() {
 
@@ -78,6 +80,13 @@ function LandingPage() {
        </div>
             {/* Filter */}
 
+            {/* CheckBox */}
+                <CheckBox list={continents} />
+
+            
+            {/* RadioBox */}
+
+            
             {/* Search */}
 
             {/* Cards */}
