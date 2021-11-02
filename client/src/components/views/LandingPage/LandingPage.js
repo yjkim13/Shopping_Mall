@@ -6,7 +6,8 @@ import Meta from 'antd/lib/card/Meta';
 import {Col, Row , Card} from 'antd'
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
-import {continents} from './Sections/Datas';
+import RadioBox from './Sections/RadioBox';
+import {continents, price} from './Sections/Datas';
 
 function LandingPage() {
 
@@ -63,7 +64,6 @@ function LandingPage() {
     const renderCards = Products.map((product,index)=> {
         return <Col lg={6} md={8} sx={24} key = {index}>
         <Card
-       
             cover={<ImageSlider images={product.images}/>}
         >
             <Meta 
@@ -103,13 +103,22 @@ function LandingPage() {
            <h2>이제 모두 여행을 떠나요!<RocketOutlined/></h2>
        </div>
             {/* Filter */}
+            <Row gutter={[16,16]}>
+                <Col lg={12} xs={24}>
+                    {/* CheckBox */}
+                    <CheckBox list={continents} handleFilters ={filters => handleFilters(filters,"continents")}/>
+                </Col>
+                <Col lg={12} xs={24}>
+                    {/* RadioBox */}
+                    <RadioBox list={price} handleFilters ={filters => handleFilters(filters,"price")}/>
+                </Col>
 
-            {/* CheckBox */}
-                <CheckBox list={continents} handleFilters ={filters => handleFilters(filters,"continents")}/>
+            </Row>
+
+           
 
             
-            {/* RadioBox */}
-
+         
             
             {/* Search */}
 
