@@ -1,13 +1,14 @@
 import React,{useEffect, useState} from 'react'
 import { FaCode } from "react-icons/fa";
 import axios from 'axios';
-import RocketOutlined from '@ant-design/icons';
+import {RocketTwoTone, CarOutlined}from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
 import {Col, Row , Card} from 'antd'
 import ImageSlider from '../../utils/ImageSlider';
 import CheckBox from './Sections/CheckBox';
 import RadioBox from './Sections/RadioBox';
 import {continents, price} from './Sections/Datas';
+import SearchFeature from './Sections/SearchFeature';
 
 function LandingPage() {
 
@@ -19,6 +20,7 @@ function LandingPage() {
         continents : [],
         price: []
     })
+    const [SearchTerm, setSearchTerm] = useState("")
 
     useEffect(() => {
 
@@ -55,7 +57,9 @@ function LandingPage() {
         let body = {
             skip: skip,
             limit: Limit,
-            loadMore : true
+            loadMore : true,
+            filters : Filters
+ 
         }
         getProdcts(body)
         setSkip(skip)
@@ -86,21 +90,58 @@ function LandingPage() {
         setSkip(0)
 
     }
+
+    const handelPrice = (value) => {
+        const data = price;
+        let array = [];
+
+        for (let key in data) {
+            if(data[key]._id === parseInt(value, 10)){
+                console.log('value',value);
+                array = data[key].array
+            }
+        }
+        return array
+    }
   
    const handleFilters = (filters,category) => {
 
         const newFilters = {...Filters}
 
         newFilters[category] = filters
-        showFilteredResults(newFilters)
+        console.log('filters',filters);
 
+        if(category ==='price') {
+            let priceValues = handelPrice(filters)
+            console.log('filters',filters);
+            newFilters[category] = priceValues
+
+        }
+
+        showFilteredResults(newFilters)
+        setFilters(newFilters)
+
+
+   }
+
+   const updateSearchTerm = (newSearchTerm) =>{
+       
+       let body = {
+           skip:0,
+           limit:Limit,
+           filter:Filters,
+           searchTerm: newSearchTerm
+        }
+        setSkip(0)
+        setSearchTerm(newSearchTerm)
+        getProdcts(body)
    }
 
 
     return (
    <div style = {{ width: '75%', margin: '3rem auto'}}>
        <div style= {{ textAlign: 'center'}}>
-           <h2>이제 모두 여행을 떠나요!<RocketOutlined/></h2>
+           <h2><CarOutlined />이제 모두 여행을 떠나요!<RocketTwoTone spin/></h2>
        </div>
             {/* Filter */}
             <Row gutter={[16,16]}>
@@ -115,12 +156,13 @@ function LandingPage() {
 
             </Row>
 
-           
-
-            
-         
-            
             {/* Search */}
+            <div style={{display:'flex',justifyContent:'flex-end',margin:'1rem auto'}}>
+            <SearchFeature 
+            refreshFunction={updateSearchTerm}
+            />
+
+            </div>
 
             {/* Cards */}
         <Row gutter= {[16, 16]} >

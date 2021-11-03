@@ -48,15 +48,44 @@ router.post('/products',(req,res)=>{
 
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let term =req.body.searchTerm
 
   let findArgs = {};
   for(let key in req.body.filters) {
     if(req.body.filters[key].length > 0){
-      findArgs[key] = req.body.filters[key];
+
+      if(key === "price"){ //key가 price일 때 
+        findArgs[key] = {
+          //Greater than equal
+          $gte: req.body.filters[key][0],
+          //Less than equal
+          $lte: req.body.filters[key][1]
+        } 
+      } else{
+        findArgs[key] = req.body.filters[key];
+      }
     }
   }
 
-  console.log('findArgs',findArgs);
+  if(term){
+    Product.find(findArgs)
+    //.find({"title": { $regex: term, $options:'i'}})
+    .find(
+      {title: { $regex: `^${term}`, $options:'i'}},
+      {destination: { $regex: `^${term}`, $options:'i'}}
+      )
+    .populate("writer")
+    .skip(skip)
+    .limit(limit)
+    .exec((err,productInfo)=> {
+      if(err) return res.status(400).json({success :false, err})
+      return res.status(200).json({
+        success: true, productInfo,
+        postSize: productInfo.length
+      })
+    })
+
+  }else{
 
   Product.find(findArgs)
   .populate("writer")
@@ -69,6 +98,7 @@ router.post('/products',(req,res)=>{
       postSize: productInfo.length
     })
   })
+}
 })
 
 module.exports = router;
