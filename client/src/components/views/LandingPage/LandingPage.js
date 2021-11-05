@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import { FaCode } from "react-icons/fa";
 import axios from 'axios';
-import {RocketTwoTone, CarOutlined}from '@ant-design/icons';
+import {RocketTwoTone, CarTwoTone}from '@ant-design/icons';
 import Meta from 'antd/lib/card/Meta';
 import {Col, Row , Card} from 'antd'
 import ImageSlider from '../../utils/ImageSlider';
@@ -68,7 +68,7 @@ function LandingPage() {
     const renderCards = Products.map((product,index)=> {
         return <Col lg={6} md={8} sx={24} key = {index}>
         <Card
-            cover={<ImageSlider images={product.images}/>}
+            cover={<a href={`/product/${product._id}`}><ImageSlider images={product.images} /></a>}
         >
             <Meta 
                 title={product.title}
@@ -141,7 +141,7 @@ function LandingPage() {
     return (
    <div style = {{ width: '75%', margin: '3rem auto'}}>
        <div style= {{ textAlign: 'center'}}>
-           <h2><CarOutlined />이제 모두 여행을 떠나요!<RocketTwoTone spin/></h2>
+           <h2><CarTwoTone twoToneColor="#ff0000" />이제 모두 여행을 떠나요!<RocketTwoTone spin/></h2>
        </div>
             {/* Filter */}
             <Row gutter={[16,16]}>

@@ -15,7 +15,7 @@ function Footer() {
       >
         <p>
           {" "}
-          Happy Coding <SmileOutlined />
+         Kim's Coding <SmileOutlined />
         </p>
       </div>
     );
