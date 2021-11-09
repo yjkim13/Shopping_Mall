@@ -9,7 +9,10 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
 import UploadProductPage from "./views/UploadProductPage/UploadProductPage.js";
 import DetailProductPage from './views/DetailProductPage/DetailProductPage.js';
-import CartPage from './views/CartPage/CartPage';
+import CartPage from './views/CartPage/CartPage.js';
+import ProductManagePage from './views/ProductManagePage/ProductManagePage';
+import { formatCountdown } from 'antd/lib/statistic/utils';
+import UpdateProductPage from './views/UpdateProductPage/UpdateProductPage'
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -27,6 +30,8 @@ function App() {
           <Route exact path="/product/upload" component={Auth(UploadProductPage, true)} />
           <Route exact path="/product/:productId" component={Auth(DetailProductPage, null)} />
           <Route exact path="/user/cart" component={Auth(CartPage, true)} />
+          <Route exact path="/product/products/list" component={Auth(ProductManagePage, null)} />
+          <Route exact path="/product/products/update/:productId" component={Auth(UpdateProductPage, null)} />
         </Switch>
       </div>
       <Footer />

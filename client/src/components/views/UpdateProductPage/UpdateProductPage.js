@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form, Input } from 'antd';
 import FileUpload from '../../utils/FileUpload';
-import Axios from 'axios';
+import axios from 'axios';
 
 
 const { TextArea } = Input;
 
 const Continents = [
+    { Key: 0, value: "------" },
     { Key: 1, value: "Africa" },
     { Key: 2, value: "Europe" },
     { Key: 3, value: "Asia" },
@@ -16,19 +17,32 @@ const Continents = [
     { Key: 7, value: "Antarctica" },
 
 ]
+function UpdateProductPage(props) {
 
-function UploadProductPage(props) {
+    const productId = props.match.params.productId
 
-    const [Title, setTitle] = useState("")
-    const [Description, setDescription] = useState("")
-    const [Price, setPrice] = useState(0)
-    const [Continent, setContinent] = useState(1)
-    const [Images, setImages] = useState([])
+    const [Product, setProduct] = useState({})
+
+    useEffect(() => {
+        axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
+            .then(response => {
+                console.log(response.data[0]);
+                setProduct(response.data[0]);
+            })
+            .catch(err => alert(err))
+    }, [])
+
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [price, setPrice] = useState(0)
+    const [continent, setContinent] = useState("")
+    const [images, setImages] = useState([])
+
 
     const titleChangeHandler = (event) => {
         setTitle(event.currentTarget.value)
-    }
 
+    }
     const descriptionChangeHandler = (event) => {
         setDescription(event.currentTarget.value)
     }
@@ -47,26 +61,27 @@ function UploadProductPage(props) {
     const submitHandler = (event) => {
 
 
-        if (!Title || !Description || !Price || !Continent || !Images) {
+        if (!title || !description || !price || !continent || !images) {
             return alert(" 모든 값을 넣어주셔야 합니다.")
         }
         //서버에 채운 값들을 Request로 보낸다.
 
         const body = {
             writer: props.user.userData._id,
-            title: Title,
-            description: Description,
-            price: Price,
-            images: Images,
-            continents: Continent
+            _id: Product._id,
+            title: title,
+            description: description,
+            price: price,
+            images: images,
+            continents: continent
         }
-        Axios.post("/api/product", body)
+        axios.post("/api/product/update", body)
             .then(response => {
                 if (response.data.success) {
-                    alert("상품 업로드에 성공했습니다.")
+                    alert("상품 수정에 성공했습니다.")
                     props.history.push('/');
                 } else {
-                    alert("상품 업로드에 실패했습니다.")
+                    alert("상품 수정에 실패했습니다.")
                 }
             })
     }
@@ -74,7 +89,7 @@ function UploadProductPage(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <h2> 여행 상품 업로드</h2>
+                <h2> 여행 상품 수정</h2>
             </div>
             <Form onSubmit={submitHandler}>
                 {/*Drop Zone */}
@@ -84,15 +99,15 @@ function UploadProductPage(props) {
                 <br />
                 <br />
                 <label>이름</label>
-                <Input onChange={titleChangeHandler} value={Title} />
+                <Input type="text" name="title" onChange={titleChangeHandler} value={title} />
                 <br />
                 <br />
                 <label>설명</label>
-                <TextArea onChange={descriptionChangeHandler} value={Description} />
+                <TextArea onChange={descriptionChangeHandler} value={description} />
                 <br />
                 <br />
                 <label>가격($)</label>
-                <Input type="number" onChange={priceChangeHandler} value={Price} />
+                <Input type="number" onChange={priceChangeHandler} value={price} />
                 <br />
                 <br />
                 <select onChange={continentChangeHandler} >
@@ -110,4 +125,4 @@ function UploadProductPage(props) {
     )
 }
 
-export default UploadProductPage
+export default UpdateProductPage

@@ -1,9 +1,10 @@
 import React from 'react'
-import './UserCardBlock.css'
+import './ProductBlock.css'
 
-function UserCardBlock(props) {
+function ProductBlock(props) {
 
-    const renderCartImage = (images) => {
+
+    const renderProductImage = (images) => {
         if (images.length > 0) {
             let image = images[0]
             return `http://localhost:5000/${image}`
@@ -11,22 +12,31 @@ function UserCardBlock(props) {
 
     }
 
+
     const renderItems = () => (
         props.products && props.products.map((product, index) => (
             <tr key={index}>
                 <td>
                     <img style={{ width: '70px' }} alt="product"
-                        src={renderCartImage(product.images)} />
+                        src={renderProductImage(product.images)} />
                 </td>
                 <td>
-                    {product.quantity} EA
+                    {product.title}
+                </td>
+                <td>
+                    {product.continents}
                 </td>
                 <td>
                     $ {product.price}
                 </td>
                 <td>
-                    <button onClick={() => props.removeItem(product._id)}>
-                        REMOVE
+                    <button>
+                        {<a href={`/product/products/update/${product._id}`}>UPDATE</a>}
+                    </button>
+                </td>
+                <td>
+                    <button onClick={() => props.deleteProduct(`${product._id}`)}>
+                        DELETE
                     </button>{/*product id를 넣는 이유는 id로 상품을 찾아서 삭제하기 위해*/}
                 </td>
             </tr>
@@ -40,9 +50,11 @@ function UserCardBlock(props) {
                 <thead>
                     <tr>
                         <th>Product Image</th>
-                        <th>Product Quantity</th>
+                        <th>Product Title</th>
+                        <th>Product Continent</th>
                         <th>Product Price</th>
-                        <th>Remove From Cart</th>
+                        <th>Product Update</th>
+                        <th>Product Remove</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,4 +65,4 @@ function UserCardBlock(props) {
     )
 }
 
-export default UserCardBlock
+export default ProductBlock

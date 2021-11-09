@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React, { useState } from 'react'
 import { Input } from 'antd';
 
 const { Search } = Input;
@@ -7,7 +7,7 @@ function SearchFeature(props) {
 
     const [SearchTrem, setSearchTrem] = useState("")
 
-    const searchHandler = (event) =>{
+    const searchHandler = (event) => {
         setSearchTrem(event.currentTarget.value)
         props.refreshFunction(event.currentTarget.value)
     }
@@ -15,11 +15,11 @@ function SearchFeature(props) {
 
     return (
         <div>
-            <Search 
-            placeholder="input search text" 
-            onChange={searchHandler} 
-            style={{ width: 200 }}
-            value={SearchTrem}
+            <Search
+                placeholder="input search text"
+                onChange={searchHandler}
+                style={{ width: 200 }}
+                value={SearchTrem}
             />
         </div>
     )
