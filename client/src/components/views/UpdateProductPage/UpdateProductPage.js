@@ -7,7 +7,7 @@ import axios from 'axios';
 const { TextArea } = Input;
 
 const Continents = [
-    { Key: 0, value: "------" },
+    { Key: 0, value: "--------" },
     { Key: 1, value: "Africa" },
     { Key: 2, value: "Europe" },
     { Key: 3, value: "Asia" },
@@ -26,8 +26,12 @@ function UpdateProductPage(props) {
     useEffect(() => {
         axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
             .then(response => {
-                console.log(response.data[0]);
                 setProduct(response.data[0]);
+                setTitle(response.data[0].title);
+                setDescription(response.data[0].description);
+                setPrice(response.data[0].price);
+                setImages(response.data[0].images);
+
             })
             .catch(err => alert(err))
     }, [])
@@ -37,7 +41,6 @@ function UpdateProductPage(props) {
     const [price, setPrice] = useState(0)
     const [continent, setContinent] = useState("")
     const [images, setImages] = useState([])
-
 
     const titleChangeHandler = (event) => {
         setTitle(event.currentTarget.value)
@@ -58,6 +61,7 @@ function UpdateProductPage(props) {
     const updateImages = (newImages) => {
         setImages(newImages)
     }
+
     const submitHandler = (event) => {
 
 
@@ -79,7 +83,7 @@ function UpdateProductPage(props) {
             .then(response => {
                 if (response.data.success) {
                     alert("상품 수정에 성공했습니다.")
-                    props.history.push('/');
+                    props.history.push('/product/products/list');
                 } else {
                     alert("상품 수정에 실패했습니다.")
                 }
@@ -94,7 +98,7 @@ function UpdateProductPage(props) {
             <Form onSubmit={submitHandler}>
                 {/*Drop Zone */}
 
-                <FileUpload refreshFunction={updateImages} />
+                <FileUpload imagesData={props} refreshFunction={updateImages} />
 
                 <br />
                 <br />

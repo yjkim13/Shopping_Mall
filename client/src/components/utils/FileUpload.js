@@ -1,14 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect} from 'react'
 import Dropzone from 'react-dropzone'
 import { PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 function FileUpload(props) {
-
+  console.log(props);
+  
   const [Images, setImages] = useState([])
+
+ 
+
+    useEffect(() => {
+      if(props && props.imagesData) {
+        const productId = props.imagesData.match.params.productId
+        axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
+            .then(response => {
+                setImages(response.data[0].images);
+            })
+            .catch(err => alert(err))}
+    }, [])
+  
+ 
+
+  
+
   const dropHandler = (files) => {
 
     let formData = new FormData();
+
     const config = {
       header: { 'content-type': 'multipart/form-data' }
     }
@@ -17,8 +36,9 @@ function FileUpload(props) {
     axios.post('/api/product/image', formData, config)
       .then(response => {
         if (response.data.success) {
-          setImages([...Images, response.data.filePath])
-          props.refreshFunction([...Images, response.data.filePath])
+          setImages([...Images, response.data.fileName])
+          console.log(response.data.fileName);
+          props.refreshFunction([...Images, response.data.fileName])
 
         } else {
           alert("파일을 저장하는데 실패했습니다.")
@@ -59,7 +79,7 @@ function FileUpload(props) {
         {Images.map((image, index) => (
           <div onClick={() => deleteHandler(image)} key={index}>
             <img style={{ minWidth: '300px', width: '300px', height: '240px' }}
-              src={`http://localhost:5000/${image}`} alt="delete"
+              src={`http://localhost:5000/uploads/${image}`} alt="delete"
             />
           </div>
         ))}

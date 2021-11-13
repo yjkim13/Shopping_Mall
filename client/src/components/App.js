@@ -27,11 +27,11 @@ function App() {
           <Route exact path="/" component={Auth(LandingPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
-          <Route exact path="/product/upload" component={Auth(UploadProductPage, true)} />
+          <Route exact path="/product/upload" component={Auth(UploadProductPage, true, true)} />
           <Route exact path="/product/:productId" component={Auth(DetailProductPage, null)} />
           <Route exact path="/user/cart" component={Auth(CartPage, true)} />
-          <Route exact path="/product/products/list" component={Auth(ProductManagePage, null)} />
-          <Route exact path="/product/products/update/:productId" component={Auth(UpdateProductPage, null)} />
+          <Route exact path="/product/products/list" component={Auth(ProductManagePage, true, true)} />
+          <Route exact path="/product/products/update/:productId" component={Auth(UpdateProductPage, true, true)} />
         </Switch>
       </div>
       <Footer />

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { Empty } from 'antd'
-import { useDispatch } from 'react-redux';
 import ProductBlock from './Sections/ProductBlock';
 
 
@@ -36,10 +35,10 @@ function ProductManagePage(props) {
         axios.post(`/api/product/delete`, body)
             .then(response => {
                 if (response.data.success) {
-                    alert("상품 수정에 성공했습니다.")
+                    alert("상품 삭제에 성공했습니다.")
                     props.history.push('/');
                 } else {
-                    alert("상품 수정에 실패했습니다.")
+                    alert("상품 삭제에 실패했습니다.")
                 }
 
             })

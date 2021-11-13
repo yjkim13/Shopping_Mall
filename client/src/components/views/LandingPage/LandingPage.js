@@ -140,7 +140,7 @@ function LandingPage() {
     return (
         <div style={{ width: '75%', margin: '3rem auto' }}>
             <div style={{ textAlign: 'center' }}>
-                <h2><CarTwoTone twoToneColor="#ff0000" />이제 모두 여행을 떠나요!<RocketTwoTone spin /></h2>
+                <h2><CarTwoTone spin twoToneColor="#ff0000" />이제 모두 여행을 떠나요!<RocketTwoTone spin /></h2>
             </div>
             {/* Filter */}
             <Row gutter={[16, 16]}>
