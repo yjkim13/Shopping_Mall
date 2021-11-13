@@ -14,7 +14,7 @@
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
     "predeploy": "npm run dev",
-    "deploy":"gh-pages -d build"
+    "deploy":"gh-pages -d dev"
   },
   "author": "John ahn",
   "license": "ISC",
