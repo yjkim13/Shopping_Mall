@@ -7,7 +7,7 @@ function ProductBlock(props) {
     const renderProductImage = (images) => {
         if (images.length > 0) {
             let image = images[0]
-            return `http://localhost:5000/uploads/${image}`
+            return `http://https://frozen-cove-46738.herokuapp.com/uploads/${image}`
         }
 
     }
