@@ -6,7 +6,7 @@ function UserCardBlock(props) {
     const renderCartImage = (images) => {
         if (images.length > 0) {
             let image = images[0]
-            return `http://https://frozen-cove-46738.herokuapp.com/uploads/${image}`
+            return `https://frozen-cove-46738.herokuapp.com/uploads/${image}`
         }
 
     }
