@@ -13,8 +13,9 @@
     "backend": "nodemon server/index.js",
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
-    "predeploy": "npm run dev",
-    "deploy":"gh-pages -d dev"
+    "develop": "concurrently \"npm run backend\" \"npm run build --prefix client\"",
+    "predeploy": "npm run develop",
+    "deploy":"gh-pages -d build"
   },
   "author": "John ahn",
   "license": "ISC",
