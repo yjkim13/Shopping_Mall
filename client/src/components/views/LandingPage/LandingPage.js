@@ -65,16 +65,23 @@ function LandingPage() {
     }
 
     const renderCards = Products.map((product, index) => {
+            let price = ""
+            if(product.remaining === 0){
+                price = "Sold Out"
+            } else{
+                price = `$${product.price}`
+            }
         return <Col lg={6} md={8} sx={24} key={index}>
             <Card
                 cover={<a href={`/product/${product._id}`}><ImageSlider images={product.images} /></a>}
             >
                 <Meta
                     title={product.title}
-                    description={`$${product.price}`}
+                    description={price}
                 />
             </Card>
         </Col>
+
     })
 
     const showFilteredResults = (filters) => {

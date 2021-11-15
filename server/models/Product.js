@@ -23,10 +23,10 @@ const productSchema = mongoose.Schema({
         type : Array,
         default: []
     },
-    sold: {
+    remaining: {
         type: Number,
-        maxlength:100,
-        default: 0
+        minlength:0,
+        default: 100
     },
     continents: {
         type: String,

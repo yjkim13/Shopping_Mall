@@ -160,6 +160,7 @@ router.post('/successBuy', auth, (req, res) => {
             id: item._id,
             price: item.price,
             quantity: item.quantity,
+            remaining: item.remaining,
             paymentId: req.body.paymentData.paymentID
         })
     })
@@ -192,14 +193,15 @@ router.post('/successBuy', auth, (req, res) => {
 
                 let products = [];
                 doc.product.forEach(item =>{
-                    products.push({id: item.id, quantity: item.quantity})
+                    products.push({id: item.id, quantity: item.quantity,
+                    remaining: item.remaining})
                 })
                     async.eachSeries(products,(item,callback)=>{
                         Product.update(
                             {_id:item.id},
                             {
                                 $inc: {
-                                    "sold" : item.quantity
+                                    "remaining" : item.remaining - item.quantity
                                 }
                             },
                             {new: false},

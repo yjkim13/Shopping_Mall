@@ -8,14 +8,20 @@ function ProductInfo(props) {
 
     const clickHandler = () => {
         //필요한 정보를 Cart 필드에 넣어준다.
-        dispatch(addToCart(props.detail._id))
+        if(props.detail.remaining === 0){
+            alert("상품의 재고가 없습니다.")
+        }else{
+            dispatch(addToCart(props.detail._id))
+        }
+        
+        
     }
 
     return (
         <div>
             <Descriptions title="Product Info">
                 <Descriptions.Item label="Price">{props.detail.price}</Descriptions.Item>
-                <Descriptions.Item label="Sold">{props.detail.sold}</Descriptions.Item>
+                <Descriptions.Item label="Remaining">{props.detail.remaining}</Descriptions.Item>
                 <Descriptions.Item label="View">{props.detail.views}</Descriptions.Item>
                 <Descriptions.Item label="Description">{props.detail.description}</Descriptions.Item>
             </Descriptions>
