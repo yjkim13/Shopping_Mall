@@ -38,6 +38,9 @@ function RightMenu(props) {
   } else if (user.userData && user.userData.role) {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="history" style={{ marginRight: -5 }}>
+          <a href="/history">History</a>
+        </Menu.Item>
         <SubMenu title={<span>Manage</span>}>
           <MenuItemGroup title="Products">
             <Menu.Item key="upload" style={{ marginRight: -5 }}>
@@ -67,6 +70,9 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="history" style={{ marginRight: -5 }}>
+          <a href="/history">History</a>
+        </Menu.Item>
         <Menu.Item key="cart" style={{ marginBottom: -5 }}>
           <Badge count={user.userData && user.userData.cart.length}>
             <a href="/user/cart" className="head-exam" style={{ marginRight: -22 }}>

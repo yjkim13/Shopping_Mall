@@ -10,6 +10,7 @@ import Footer from "./views/Footer/Footer"
 import UploadProductPage from "./views/UploadProductPage/UploadProductPage.js";
 import DetailProductPage from './views/DetailProductPage/DetailProductPage.js';
 import CartPage from './views/CartPage/CartPage.js';
+import HistoryPage from './views/HistoryPage/HistoryPage.js';
 import ProductManagePage from './views/ProductManagePage/ProductManagePage';
 import { formatCountdown } from 'antd/lib/statistic/utils';
 import UpdateProductPage from './views/UpdateProductPage/UpdateProductPage'
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/user/cart" component={Auth(CartPage, true)} />
           <Route exact path="/product/products/list" component={Auth(ProductManagePage, true, true)} />
           <Route exact path="/product/products/update/:productId" component={Auth(UpdateProductPage, true, true)} />
+          <Route exact path="/history" component={Auth(HistoryPage, true)} />
         </Switch>
       </div>
       <Footer />
