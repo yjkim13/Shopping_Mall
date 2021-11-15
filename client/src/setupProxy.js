@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://frozen-cove-46738.herokuapp.com',
+            target: 'http://localhost:5000',
             changeOrigin: true,
         })
     );

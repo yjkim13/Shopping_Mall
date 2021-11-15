@@ -11,8 +11,8 @@ function ProductImage(props) {
 
             props.detail.images.map(item => {
                 images.push({
-                    original: `https://frozen-cove-46738.herokuapp.com/uploads/${item}`,
-                    thumbnail: `https://frozen-cove-46738.herokuapp.com/uploads/${item}`
+                    original: `http://localhost:5000/uploads/${item}`,
+                    thumbnail: `http://localhost:5000/uploads/${item}`
                 })
 
             })

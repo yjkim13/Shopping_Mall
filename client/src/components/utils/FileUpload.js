@@ -79,7 +79,7 @@ function FileUpload(props) {
         {Images.map((image, index) => (
           <div onClick={() => deleteHandler(image)} key={index}>
             <img style={{ minWidth: '300px', width: '300px', height: '240px' }}
-              src={`https://frozen-cove-46738.herokuapp.com/uploads/${image}`} alt="delete"
+              src={`http://localhost:5000/uploads/${image}`} alt="delete"
             />
           </div>
         ))}
